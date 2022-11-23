@@ -46,4 +46,8 @@ func main() {
 	next := round.Add(1 * time.Second)
 	fmt.Printf("now: %v\nround: %v\nnext: %v\n", now, round, next)
 }
+// output:
+// now: 2022-11-23 11:01:29.566766 +0800 CST m=+0.000057801
+// round: 2022-11-23 11:01:29 +0800 CST
+// next: 2022-11-23 11:01:30 +0800 CST
 ```
