@@ -1,8 +1,9 @@
-- [dump raw HTTP response message](#dump-raw-http-response-message)
+- [打印原始HTTP响应 dump raw HTTP response message](#打印原始http响应-dump-raw-http-response-message)
 - [rounding to N](#rounding-to-n)
 - [next second](#next-second)
+- [round to precision](#round-to-precision)
 
-## dump raw HTTP response message
+## 打印原始HTTP响应 dump raw HTTP response message
 
 ```go
 func main() {
@@ -50,4 +51,19 @@ func main() {
 // now: 2022-11-23 11:01:29.566766 +0800 CST m=+0.000057801
 // round: 2022-11-23 11:01:29 +0800 CST
 // next: 2022-11-23 11:01:30 +0800 CST
+```
+
+## round to precision
+
+```go
+func main() {
+	fmt.Println(roundToPrecision(3.1415926, 2)) // 3.14
+	fmt.Println(roundToPrecision(3.1415926, 3)) // 3.142
+	fmt.Println(roundToPrecision(3.1, 1))       // 3.1
+}
+
+func roundToPrecision(v float64, precision int) float64 {
+	ratio := math.Pow(10, float64(precision))
+	return math.Round(v*ratio) / ratio
+}
 ```
