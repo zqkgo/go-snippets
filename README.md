@@ -1,7 +1,7 @@
 - [打印原始HTTP响应 dump raw HTTP response message](#打印原始http响应-dump-raw-http-response-message)
-- [rounding to N](#rounding-to-n)
-- [next second](#next-second)
-- [round to precision](#round-to-precision)
+- [计算N的整数倍 rounding to N](#计算n的整数倍-rounding-to-n)
+- [下一秒时间戳 next second](#下一秒时间戳-next-second)
+- [浮点数保留精度 round to precision](#浮点数保留精度-round-to-precision)
 
 ## 打印原始HTTP响应 dump raw HTTP response message
 
@@ -25,7 +25,7 @@ func main() {
 }
 ```
 
-## rounding to N
+## 计算N的整数倍 rounding to N
 
 ```go
 func main() {
@@ -38,7 +38,7 @@ func main() {
 }
 ```
 
-## next second
+## 下一秒时间戳 next second
 
 ```go
 func main() {
@@ -53,7 +53,7 @@ func main() {
 // next: 2022-11-23 11:01:30 +0800 CST
 ```
 
-## round to precision
+## 浮点数保留精度 round to precision
 
 ```go
 func main() {
