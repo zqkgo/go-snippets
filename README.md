@@ -2,6 +2,7 @@
 - [计算N的整数倍 rounding to N](#计算n的整数倍-rounding-to-n)
 - [下一秒时间戳 next second](#下一秒时间戳-next-second)
 - [浮点数保留精度 round to precision](#浮点数保留精度-round-to-precision)
+- [打印x进制对应的十进制 print decimal of bianry/octal/hexadecimal](#打印x进制对应的十进制-print-decimal-of-bianryoctalhexadecimal)
 
 ## 打印原始HTTP响应 dump raw HTTP response message
 
@@ -65,5 +66,15 @@ func main() {
 func roundToPrecision(v float64, precision int) float64 {
 	ratio := math.Pow(10, float64(precision))
 	return math.Round(v*ratio) / ratio
+}
+```
+
+## 打印x进制对应的十进制 print decimal of bianry/octal/hexadecimal
+
+```go
+func main() {
+	fmt.Println(0b11111111) // 255 二进制
+	fmt.Println(0111)       // 73 八进制
+	fmt.Println(0xa5c)      // 2652 十六进制
 }
 ```
