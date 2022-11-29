@@ -2,7 +2,7 @@
 - [计算N的整数倍 rounding to N](#计算n的整数倍-rounding-to-n)
 - [下一秒时间戳 next second](#下一秒时间戳-next-second)
 - [浮点数保留精度 round to precision](#浮点数保留精度-round-to-precision)
-- [打印x进制对应的十进制 print decimal of bianry/octal/hexadecimal](#打印x进制对应的十进制-print-decimal-of-bianryoctalhexadecimal)
+- [打印x进制对应的十进制 print decimal of binary/octal/hexadecimal](#打印x进制对应的十进制-print-decimal-of-binaryoctalhexadecimal)
 
 ## 打印原始HTTP响应 dump raw HTTP response message
 
@@ -69,7 +69,7 @@ func roundToPrecision(v float64, precision int) float64 {
 }
 ```
 
-## 打印x进制对应的十进制 print decimal of bianry/octal/hexadecimal
+## 打印x进制对应的十进制 print decimal of binary/octal/hexadecimal
 
 ```go
 func main() {
