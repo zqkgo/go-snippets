@@ -3,6 +3,7 @@
 - [下一秒时间戳 next second](#下一秒时间戳-next-second)
 - [浮点数保留精度 round to precision](#浮点数保留精度-round-to-precision)
 - [打印x进制对应的十进制 print decimal of binary/octal/hexadecimal](#打印x进制对应的十进制-print-decimal-of-binaryoctalhexadecimal)
+- [昨天的日期 print the date of yesterday](#昨天的日期-print-the-date-of-yesterday)
 
 ## 打印原始HTTP响应 dump raw HTTP response message
 
@@ -76,5 +77,25 @@ func main() {
 	fmt.Println(0b11111111) // 255 二进制
 	fmt.Println(0111)       // 73 八进制
 	fmt.Println(0xa5c)      // 2652 十六进制
+}
+```
+
+## 昨天的日期 print the date of yesterday
+
+```go
+func main() {
+	t, err := time.Parse("2006-01-02 15:04:05", "2022-11-01 13:00:00")
+	if err != nil {
+		panic(err)
+	}
+	yesterday := t.AddDate(0, 0, -1).Format("2006-01-02")
+	fmt.Println(yesterday) // 2022-10-31
+
+	t, err = time.Parse("2006-01-02 15:04:05", "2022-11-02 13:00:00")
+	if err != nil {
+		panic(err)
+	}
+	yesterday = t.AddDate(0, 0, -1).Format("2006-01-02")
+	fmt.Println(yesterday) // 2022-11-01
 }
 ```
