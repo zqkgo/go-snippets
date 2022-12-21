@@ -4,7 +4,7 @@
 - [浮点数保留精度 round to precision](#浮点数保留精度-round-to-precision)
 - [打印x进制对应的十进制 print decimal of binary/octal/hexadecimal](#打印x进制对应的十进制-print-decimal-of-binaryoctalhexadecimal)
 - [昨天的日期 print the date of yesterday](#昨天的日期-print-the-date-of-yesterday)
-- [接口、实现与配置 interface, implementaton and options](#接口实现与配置-interface-implementaton-and-options)
+- [接口、实现与配置 interface, implementaton and options](#接口实现与配置-interface-implementation-and-options)
 
 ## 打印原始HTTP响应 dump raw HTTP response message
 
@@ -101,7 +101,7 @@ func main() {
 }
 ```
 
-## 接口、实现与配置 interface, implementaton and options
+## 接口、实现与配置 interface, implementation and options
 
 ```go
 // options used by all implementations
