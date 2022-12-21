@@ -4,6 +4,7 @@
 - [浮点数保留精度 round to precision](#浮点数保留精度-round-to-precision)
 - [打印x进制对应的十进制 print decimal of binary/octal/hexadecimal](#打印x进制对应的十进制-print-decimal-of-binaryoctalhexadecimal)
 - [昨天的日期 print the date of yesterday](#昨天的日期-print-the-date-of-yesterday)
+- [接口、实现与配置 interface, implementaton and options](#接口实现与配置-interface-implementaton-and-options)
 
 ## 打印原始HTTP响应 dump raw HTTP response message
 
@@ -97,5 +98,66 @@ func main() {
 	}
 	yesterday = t.AddDate(0, 0, -1).Format("2006-01-02")
 	fmt.Println(yesterday) // 2022-11-01
+}
+```
+
+## 接口、实现与配置 interface, implementaton and options
+
+```go
+// options used by all implementations
+type walkerOptions struct {
+	dur time.Duration
+}
+
+type Walker interface {
+	Walk()
+}
+
+type dog struct {
+	opts walkerOptions
+}
+
+func newDog(opts walkerOptions) *dog {
+	return &dog{
+		opts: opts,
+	}
+}
+
+func (d *dog) Walk() {
+	for {
+		println("dog is walking")
+		time.Sleep(d.opts.dur)
+	}
+}
+
+type human struct {
+	opts walkerOptions
+}
+
+func newHuman(opts walkerOptions) *human {
+	return &human{
+		opts: opts,
+	}
+}
+
+func (h *human) Walk() {
+	for {
+		println("human is walking")
+		time.Sleep(h.opts.dur)
+	}
+}
+
+func main() {
+	var walkers []Walker
+	walkers = append(walkers, newDog(walkerOptions{
+		dur: 500 * time.Millisecond,
+	}))
+	walkers = append(walkers, newHuman(walkerOptions{
+		dur: 1 * time.Second,
+	}))
+	for _, w := range walkers {
+		go w.Walk()
+	}
+	select {}
 }
 ```
