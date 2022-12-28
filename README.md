@@ -5,6 +5,7 @@
 - [打印x进制对应的十进制 print decimal of binary/octal/hexadecimal](#打印x进制对应的十进制-print-decimal-of-binaryoctalhexadecimal)
 - [昨天的日期 print the date of yesterday](#昨天的日期-print-the-date-of-yesterday)
 - [接口、实现与配置 interface, implementaton and options](#接口实现与配置-interface-implementation-and-options)
+- [避免参数零值](#避免参数零值-prevent-zero-value-in-args)
 
 ## 打印原始HTTP响应 dump raw HTTP response message
 
@@ -160,4 +161,34 @@ func main() {
 	}
 	select {}
 }
+```
+
+## 避免参数零值 prevent zero value in args
+
+```go
+type Task struct {
+	ID   string `json:"id"`
+	Name string `json:"name"`
+}
+
+type PostTasksArgs struct {
+	Seq    *int   `json:"seq"`
+	Owner  string `json:"owner"`
+	Enable *bool  `json:"enable"`
+	Task   *Task  `json:"task"`
+}
+
+func main() {
+	s := `{"owner":"root", "enable":true}`
+	var args PostTasksArgs
+	err := json.Unmarshal([]byte(s), &args)
+	if err != nil {
+		panic(err)
+	}
+	if args.Enable != nil {
+		println("enable: ", *args.Enable) // true
+	}
+	fmt.Printf("%+v\n", args) // {Seq:<nil> Owner:root Enable:0xc00001428c Task:<nil>}
+}
+
 ```
