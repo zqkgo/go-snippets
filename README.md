@@ -7,6 +7,7 @@
 - [接口、实现与配置 interface, implementaton and options](#接口实现与配置-interface-implementation-and-options)
 - [避免参数零值](#避免参数零值-prevent-zero-value-in-args)
 
+
 ## 打印原始HTTP响应 dump raw HTTP response message
 
 ```go
@@ -191,4 +192,25 @@ func main() {
 	fmt.Printf("%+v\n", args) // {Seq:<nil> Owner:root Enable:0xc00001428c Task:<nil>}
 }
 
+```
+
+## 浅复制结构体 shallow copy struct
+
+```go
+type Deployment struct {
+	ID      string
+	Status  int
+	StartAt time.Time
+}
+
+func main() {
+	d1 := &Deployment{
+		ID:      "1",
+		Status:  2,
+		StartAt: time.Now().Add(1 * time.Hour),
+	}
+	d2 := *d1
+	// d1 addr: 0xc00007c180, d2 addr: 0xc00007c1b0, d1 val == d2 val: true
+	fmt.Printf("d1 addr: %p, d2 addr: %p, d1 val == d2 val: %v\n", d1, &d2, *d1 == d2)
+}
 ```
