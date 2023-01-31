@@ -5,9 +5,9 @@
 - [打印x进制对应的十进制 print decimal of binary/octal/hexadecimal](#打印x进制对应的十进制-print-decimal-of-binaryoctalhexadecimal)
 - [昨天的日期 print the date of yesterday](#昨天的日期-print-the-date-of-yesterday)
 - [接口、实现与配置 interface, implementaton and options](#接口实现与配置-interface-implementation-and-options)
-- [避免参数零值](#避免参数零值-prevent-zero-value-in-args)
-- [浅复制结构体](#浅复制结构体-shallow-copy-struct)
-- [重定向标准错误到文件](#重定向标准错误到文件-redirect-stderr-to-a-file)
+- [避免参数零值 prevent zero value in args](#避免参数零值-prevent-zero-value-in-args)
+- [浅复制结构体 shallow copy struct](#浅复制结构体-shallow-copy-struct)
+- [重定向标准错误到文件 redirect stderr to a file](#重定向标准错误到文件-redirect-stderr-to-a-file)
 
 
 ## 打印原始HTTP响应 dump raw HTTP response message
