@@ -7,6 +7,7 @@
 - [接口、实现与配置 interface, implementaton and options](#接口实现与配置-interface-implementation-and-options)
 - [避免参数零值](#避免参数零值-prevent-zero-value-in-args)
 - [浅复制结构体](#浅复制结构体-shallow-copy-struct)
+- [重定向标准错误到文件](#重定向标准错误到文件-redirect-stderr-to-a-file)
 
 
 ## 打印原始HTTP响应 dump raw HTTP response message
@@ -213,5 +214,40 @@ func main() {
 	d2 := *d1
 	// d1 addr: 0xc00007c180, d2 addr: 0xc00007c1b0, d1 val == d2 val: true
 	fmt.Printf("d1 addr: %p, d2 addr: %p, d1 val == d2 val: %v\n", d1, &d2, *d1 == d2)
+}
+```
+
+## 重定向标准错误到文件 redirect stderr to a file
+
+```go
+func main() {
+	name := "tmp.txt"
+	f, err := os.OpenFile(name, os.O_CREATE|os.O_APPEND|os.O_RDWR|os.O_TRUNC, 0777)
+	if err != nil {
+		panic(err)
+	}
+
+	// redirect stderr to fd
+	err = syscall.Dup2(int(f.Fd()), 2)
+	if err != nil {
+		panic(err)
+	}
+	f.Close()
+
+	msg := "message written to stderr"
+	os.Stderr.WriteString(msg)
+
+	f, err = os.Open(name)
+	if err != nil {
+		panic(err)
+	}
+	bs, err := ioutil.ReadAll(f)
+	if err != nil && err != io.EOF {
+		panic(err)
+	}
+
+	fmt.Println(msg == string(bs)) // should be true
+
+	os.Remove(name)
 }
 ```
