@@ -8,7 +8,7 @@
 - [避免参数零值 prevent zero value in args](#避免参数零值-prevent-zero-value-in-args)
 - [浅复制结构体 shallow copy struct](#浅复制结构体-shallow-copy-struct)
 - [重定向标准错误到文件 redirect stderr to a file](#重定向标准错误到文件-redirect-stderr-to-a-file)
-
+- [覆盖结构体的同时保留旧地址](#覆盖结构体的同时保留旧地址-override-a-struct-while-keeping-the-old-address)
 
 ## 打印原始HTTP响应 dump raw HTTP response message
 
@@ -249,5 +249,21 @@ func main() {
 	fmt.Println(msg == string(bs)) // should be true
 
 	os.Remove(name)
+}
+```
+
+## 覆盖结构体的同时保留旧地址 override a struct while keeping the old address
+
+```go
+type Foo struct {
+	Bar string
+	Biz int
+}
+
+func main() {
+	p1 := &Foo{Bar: "Hello", Biz: 1024}
+	p2 := &Foo{Bar: "World", Biz: 2048}
+	*p2 = *p1
+	fmt.Println(p2) // &{Hello 1024}
 }
 ```
