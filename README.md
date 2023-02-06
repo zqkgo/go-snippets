@@ -8,7 +8,7 @@
 - [避免参数零值 prevent zero value in args](#避免参数零值-prevent-zero-value-in-args)
 - [浅复制结构体 shallow copy struct](#浅复制结构体-shallow-copy-struct)
 - [重定向标准错误到文件 redirect stderr to a file](#重定向标准错误到文件-redirect-stderr-to-a-file)
-- [覆盖结构体的同时保留旧地址](#覆盖结构体的同时保留旧地址-override-a-struct-while-keeping-the-old-address)
+- [覆盖结构体的同时保留旧地址 override a struct while keeping the old address](#覆盖结构体的同时保留旧地址-override-a-struct-while-keeping-the-old-address)
 
 ## 打印原始HTTP响应 dump raw HTTP response message
 
