@@ -9,6 +9,7 @@
 - [浅复制结构体 shallow copy struct](#浅复制结构体-shallow-copy-struct)
 - [重定向标准错误到文件 redirect stderr to a file](#重定向标准错误到文件-redirect-stderr-to-a-file)
 - [覆盖结构体的同时保留旧地址 override a struct while keeping the old address](#覆盖结构体的同时保留旧地址-override-a-struct-while-keeping-the-old-address)
+- [清空slice但保留已分配内存 clear a slice but keep the allocated memory](#清空slice但保留已分配内存-clear-a-slice-but-keep-the-allocated-memory)
 
 ## 打印原始HTTP响应 dump raw HTTP response message
 
@@ -265,5 +266,20 @@ func main() {
 	p2 := &Foo{Bar: "World", Biz: 2048}
 	*p2 = *p1
 	fmt.Println(p2) // &{Hello 1024}
+}
+```
+
+## 清空slice但保留已分配内存 clear a slice but keep the allocated memory
+
+```go
+func main() {
+	var nums []int
+	for i := 0; i < 2048; i++ {
+		nums = append(nums, i)
+	}
+	cap1 := cap(nums)
+	nums = nums[:0]
+	cap2 := cap(nums)
+	fmt.Println(len(nums), cap1 == cap2, nums[99:103]) // 0 2560 [99 100 101 102]
 }
 ```
