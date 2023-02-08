@@ -280,6 +280,6 @@ func main() {
 	cap1 := cap(nums)
 	nums = nums[:0]
 	cap2 := cap(nums)
-	fmt.Println(len(nums), cap1 == cap2, nums[99:103]) // 0 2560 [99 100 101 102]
+	fmt.Println(len(nums), cap1 == cap2, nums[99:103]) // 0 true [99 100 101 102]
 }
 ```
