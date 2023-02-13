@@ -10,6 +10,7 @@
 - [重定向标准错误到文件 redirect stderr to a file](#重定向标准错误到文件-redirect-stderr-to-a-file)
 - [覆盖结构体的同时保留旧地址 override a struct while keeping the old address](#覆盖结构体的同时保留旧地址-override-a-struct-while-keeping-the-old-address)
 - [清空slice但保留已分配内存 clear a slice but keep the allocated memory](#清空slice但保留已分配内存-clear-a-slice-but-keep-the-allocated-memory)
+- [并发监听多个channel listening on multiple channels concurrently](#并发监听多个channel-listening-on-multiple-channels-concurrently)
 
 ## 打印原始HTTP响应 dump raw HTTP response message
 
@@ -281,5 +282,38 @@ func main() {
 	nums = nums[:0]
 	cap2 := cap(nums)
 	fmt.Println(len(nums), cap1 == cap2, nums[99:103]) // 0 true [99 100 101 102]
+}
+```
+
+## 并发监听多个channel listening on multiple channels concurrently
+
+```go
+func main() {
+	ch1 := make(chan string, 1)
+	ch2 := make(chan string, 1)
+	go func() {
+		for {
+			var s string
+			select {
+			case s = <-ch1:
+			case s = <-ch2:
+			}
+			// to ch1
+			// to ch2
+			// to ch1
+			// to ch2
+			fmt.Println(s)
+		}
+	}()
+	var n int
+	for {
+		time.Sleep(1 * time.Second)
+		if n%2 == 0 {
+			ch1 <- "to ch1"
+		} else {
+			ch2 <- "to ch2"
+		}
+		n++
+	}
 }
 ```
