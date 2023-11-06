@@ -10,8 +10,8 @@
 - [重定向标准错误到文件 redirect stderr to a file](#重定向标准错误到文件-redirect-stderr-to-a-file)
 - [覆盖结构体的同时保留旧地址 override a struct while keeping the old address](#覆盖结构体的同时保留旧地址-override-a-struct-while-keeping-the-old-address)
 - [清空slice但保留已分配内存 clear a slice but keep the allocated memory](#清空slice但保留已分配内存-clear-a-slice-but-keep-the-allocated-memory)
-- [并发监听多个channel listening on multiple channels concurrently](#并发监听多个channel-listening-on-multiple-channels-concurrently)
-- [执行系统命令](#执行系统命令-execute-system-command)
+- [并发监听多个 channel listening on multiple channels concurrently](#并发监听多个channel-listening-on-multiple-channels-concurrently)
+- [执行系统命令 execute system command](#执行系统命令-execute-system-command)
 
 ## 打印原始HTTP响应 dump raw HTTP response message
 
