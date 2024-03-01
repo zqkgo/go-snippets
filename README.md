@@ -12,6 +12,7 @@
 - [清空slice但保留已分配内存 clear a slice but keep the allocated memory](#清空slice但保留已分配内存-clear-a-slice-but-keep-the-allocated-memory)
 - [并发监听多个 channel listening on multiple channels concurrently](#并发监听多个channel-listening-on-multiple-channels-concurrently)
 - [执行系统命令 execute system command](#执行系统命令-execute-system-command)
+- [字符串切片编解码成字符串 convert between string and string slice](#字符串切片编解码成字符串-convert-between-string-and-string-slice)
 
 ## 打印原始HTTP响应 dump raw HTTP response message
 
@@ -332,5 +333,31 @@ func main() {
 
 func execCmd(line string) ([]byte, error) {
 	return exec.Command("bash", "-c", line).Output()
+}
+```
+
+## 字符串切片编解码成字符串 convert between string and string slice
+```go
+type whateverKey string
+
+func (k *whateverKey) enc(domains []string) {
+	sort.SliceStable(domains, func(i, j int) bool {
+		return domains[i] < domains[j]
+	})
+	*k = whateverKey(strings.Join(domains, ","))
+}
+
+func (k *whateverKey) dec() []string {
+	return strings.Split(string(*k), ",")
+}
+
+func main() {
+	var k whateverKey
+	k.enc([]string{"c.com", "d.com", "a.com", "b.com", "e.com"})
+
+	// a.com,b.com,c.com,d.com,e.com
+	fmt.Println(k)
+	// [a.com b.com c.com d.com e.com]
+	fmt.Println(k.dec())
 }
 ```
