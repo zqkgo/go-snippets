@@ -13,6 +13,7 @@
 - [并发监听多个 channel listening on multiple channels concurrently](#并发监听多个channel-listening-on-multiple-channels-concurrently)
 - [执行系统命令 execute system command](#执行系统命令-execute-system-command)
 - [字符串切片编解码成字符串 convert between string and string slice](#字符串切片编解码成字符串-convert-between-string-and-string-slice)
+- [Goroutine 并发控制 concurrency control of goroutines](#goroutine-并发控制-concurrency-control-of-goroutines)
 
 ## 打印原始HTTP响应 dump raw HTTP response message
 
@@ -359,5 +360,32 @@ func main() {
 	fmt.Println(k)
 	// [a.com b.com c.com d.com e.com]
 	fmt.Println(k.dec())
+}
+```
+
+## Goroutine 并发控制 concurrency control of goroutines
+```go
+func main() {
+	var wg sync.WaitGroup
+	concurrency := make(chan struct{}, 100)
+	total := 10000
+	for i := 0; i < total; i++ {
+		concurrency <- struct{}{}
+		wg.Add(1)
+		go func(i int) {
+			defer func() {
+				<-concurrency
+				wg.Done()
+			}()
+			doTheJob(i)
+			time.Sleep(1 * time.Second)
+		}(i)
+	}
+	// wait for all jobs to be done.
+	wg.Wait()
+}
+
+func doTheJob(i int) {
+	fmt.Printf("job %d is running\n", i)
 }
 ```
